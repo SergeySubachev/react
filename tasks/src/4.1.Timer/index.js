@@ -47,6 +47,19 @@ class TimeDisplay extends React.Component {
       <div className="time">{this.state.localTime.toLocaleTimeString()}</div>
     );
   }
+
+  componentDidMount() {
+    this.intervalId = setInterval(this.onTimerHandler, 1000);
+  }
+
+  onTimerHandler = () => {
+    console.log('tick');
+    this.setState({localTime: new Date()})
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.intervalId);
+  }
 }
 
 ReactDom.render(<Timer />, document.getElementById('app'));

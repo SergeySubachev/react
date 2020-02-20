@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import ReactDom from "react-dom";
 import "./styles.css";
 
@@ -11,7 +11,8 @@ import "./styles.css";
     Список хуков, которые могут пригодиться: useState, useRef, useEffect
  */
 
-class App extends React.Component {
+function App() {
+  const [lastBlockId, setLastBlockId] = setState(0);
   constructor(props) {
     super(props);
     this.lastBlockId = 0;
@@ -58,27 +59,21 @@ class App extends React.Component {
   }
 }
 
-class CounterBlock extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      value: 0
-    };
-  }
+function CounterBlock() {
+  const [value, setValue] = useState(0);
+  const timerRef = useRef(null);
 
-  componentDidMount() {
-    this.timer = setInterval(() => {
-      this.setState({ value: this.state.value + 1 });
+  useEffect(() => {
+    timerRef.current = setInterval(() => {
+      setValue(value + 1);
     }, 1000);
-  }
 
-  componentWillUnmount() {
-    clearInterval(this.timer);
-  }
+    return () => {
+      clearInterval(this.timer);
+    }
+  }, []);
 
-  render() {
-    return <div className="block">{this.state.value}</div>;
-  }
+  return <div className="block">{value}</div>;
 }
 
 ReactDom.render(<App />, document.getElementById("app"));

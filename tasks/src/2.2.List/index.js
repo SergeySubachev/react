@@ -43,11 +43,16 @@ function renderPost(post) {
 }
 
 function renderAuthors(posts) {
+  function insAuths() {
+    let res = [];
+    for (const p of posts) {
+      res.push(<span>{p.author}</span>)
+    }
+    return res;
+  }
   return (
     <div className="authors">
-      <span>{posts[0].author}</span>
-      <span>{posts[1].author}</span>
-      <span>{posts[2].author}</span>
+      {insAuths()}
     </div>
   );
 }
@@ -55,9 +60,7 @@ function renderAuthors(posts) {
 ReactDom.render(
   <div className="page">
     <div className="posts">
-      {renderPost(posts[0])}
-      {renderPost(posts[1])}
-      {renderPost(posts[2])}
+      {posts.map(p => renderPost(p))}
     </div>
     {renderAuthors(posts)}
   </div>,

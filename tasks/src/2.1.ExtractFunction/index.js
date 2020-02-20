@@ -6,12 +6,33 @@ import './styles.css';
      Выдели метод отрисовки лота (renderLot), метод отрисовки поста (renderPost) и используй их.
  */
 
+function renderLot(lotName, lotDescription) {
+  return (<div className="lot">
+    <div className="lotName">{lotName}</div>
+    <div className="lotDescription">{lotDescription}</div>
+  </div>)
+}
+
+function renderPost(author, time, msg) {
+  return (
+    <div className="post">
+      <div className="postHeader">
+        <span className="postAuthor">{author}</span>
+        <br />
+        <span className="postTime">{time}</span>
+        <div className="postMessage">{msg}</div>
+      </div>
+    </div>)
+}
+
 ReactDom.render(
   <div className="page">
-    <div className="lot">
+    {/* <div className="lot">
       <div className="lotName">Форма для выпекания</div>
       <div className="lotDescription">Идеальна для приготовления десертов!</div>
-    </div>
+    </div> */}
+    {renderLot("Форма для выпекания", "Идеальна для приготовления десертов!")}
+
     <div className="posts">
       <div className="post">
         <div className="postHeader">
